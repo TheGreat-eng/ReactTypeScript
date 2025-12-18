@@ -2,34 +2,42 @@ import TodoData from "./todo.data";
 import { useState } from "react";
 import ToDoInput from "./todo.input";
 
+interface ITodo {
+    id: number;
+    title: string;
+    completed: boolean;
+}
+
 const ToDoList = () => {
-    const [todos, setTodos] = useState([
-        { id: 1, title: "Learn React", completed: true },
-        { id: 2, title: "Learn TypeScript", completed: false },
-        { id: 3, title: "Build a Todo App", completed: false },
-    ]);
+    // const initialTodos = [
+    //     { id: 1, title: "Learn React", completed: true },
+    //     { id: 2, title: "Learn TypeScript", completed: false },
+    //     { id: 3, title: "Build a Todo App", completed: false },
+    // ];
+
+    const [listTodos, setListTodos] = useState<ITodo[]>([]);
 
     const handleAddTodo = (title: string) => {
         const newTodo = {
-            id: Date.now(), // Sử dụng timestamp để tránh trùng ID
+            id: Date.now(),
             title,
             completed: false
         };
-        setTodos([...todos, newTodo]);
+        setListTodos([...listTodos, newTodo]);
     };
 
     const toggleTodo = (id: number) => {
-        setTodos(todos.map(todo =>
+        setListTodos(listTodos.map(todo =>
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
         ));
     };
 
     const deleteTodo = (id: number) => {
-        setTodos(todos.filter(todo => todo.id !== id));
+        setListTodos(listTodos.filter(todo => todo.id !== id));
     };
 
-    const completedCount = todos.filter(todo => todo.completed).length;
-    const totalCount = todos.length;
+    const completedCount = listTodos.filter(todo => todo.completed).length;
+    const totalCount = listTodos.length;
 
     return (
         <div style={{
@@ -105,7 +113,7 @@ const ToDoList = () => {
                 {/* Todo List */}
                 <div style={{ padding: "30px" }}>
                     <TodoData
-                        todos={todos}
+                        todos={listTodos}
                         onToggle={toggleTodo}
                         onDelete={deleteTodo}
                         owner={"provip"}
