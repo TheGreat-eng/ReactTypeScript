@@ -34,7 +34,7 @@ const ToDoInput = (props: IProps) => {
                 placeholder="✍️ Add a new task..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
                 style={{
                     flex: "1",
                     padding: "15px 20px",

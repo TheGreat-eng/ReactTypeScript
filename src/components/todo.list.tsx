@@ -17,6 +17,8 @@ const ToDoList = () => {
 
     const [listTodos, setListTodos] = useState<ITodo[]>([]);
 
+    //const[todos, setTodos] = useState();
+
     const handleAddTodo = (title: string) => {
         const newTodo = {
             id: Date.now(),
